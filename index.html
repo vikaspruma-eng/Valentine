@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bhawna 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #ffb3d9, #1a0011);
+  color: white;
+}
+
+/* Background image */
+.bg {
+  position: fixed;
+  inset: 0;
+  background: url("bhawna.jpg") center/cover no-repeat;
+  filter: brightness(0.5) blur(1px);
+  z-index: -2;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.3), rgba(0,0,0,.7));
+  z-index: -1;
+}
+
+h1 {
+  margin-top: 50px;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #ffb3da;
+  text-shadow: 0 0 20px #ff4fa3;
+}
+
+.container {
+  position: absolute;
+  inset: 0;
+}
+
+button {
+  position: absolute;
+  padding: 16px 36px;
+  font-size: 20px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+
+#yes {
+  background: linear-gradient(135deg, #2ecc71, #00ff99);
+  color: #003d1f;
+  left: 30%;
+  top: 60%;
+  font-weight: bold;
+  box-shadow: 0 0 20px #2ecc71;
+}
+
+#no {
+  background: linear-gradient(135deg, #ff4d4d, #b30000);
+  color: white;
+  left: 55%;
+  top: 60%;
+}
+
+@keyframes shake {
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-6px)}
+  100%{transform:translateX(0)}
+}
+
+/* Hearts */
+.heart {
+  position: fixed;
+  bottom: -30px;
+  font-size: 22px;
+  animation: float linear forwards;
+  pointer-events: none;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+/* Love screen */
+.love {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #ff5fa2, #2b0018);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  z-index: 10;
+}
+
+.love h2 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  text-shadow: 0 0 25px #fff;
+}
+
+.love p {
+  max-width: 800px;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<h1>Will you be my Valentine, Bhawna 💘</h1>
+
+<div class="container">
+  <button id="yes">YES</button>
+  <button id="no">NO</button>
+</div>
+
+<div class="love" id="love">
+  <h2>Bhawna Dhiman 💖</h2>
+  <p>
+    I knew you would say yes ❤️<br><br>
+    I love you so much my sweetheart, my cutie pie, my queen, my princess, my darling.
+    I love you today and forever.
+    My world 🌍💞
+  </p>
+</div>
+
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const love = document.getElementById("love");
+const music = document.getElementById("music");
+
+let scale = 1;
+let musicStarted = false;
+
+function startMusic() {
+  if (!musicStarted) {
+    music.play();
+    musicStarted = true;
+  }
+}
+
+no.onclick = () => {
+  startMusic();
+  no.style.animation = "shake .3s";
+  setTimeout(() => {
+    no.style.animation = "";
+    no.style.left = Math.random() * (window.innerWidth - no.offsetWidth) + "px";
+    no.style.top = Math.random() * (window.innerHeight - no.offsetHeight) + "px";
+  }, 300);
+
+  scale += 0.25;
+  yes.style.transform = `scale(${scale})`;
+};
+
+yes.onclick = () => {
+  startMusic();
+  love.style.display = "flex";
+};
+
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.textContent = "💖";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = 4 + Math.random() * 4 + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 8000);
+}, 250);
+</script>
+
+</body>
+</html>
